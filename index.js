@@ -1,10 +1,16 @@
+// required for server
 const express = require('express')
 const rowdy = require('rowdy-logger')
 
+// configure express app
 const app = express()
 const rowdyResults = rowdy.begin(app)
+const PORT = process.env.PORT || 3001
 
-const PORT = process.env.PORT || 3000
+// middlewares
+// body parser
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json()) // for the request body
 
 app.get('/', (req, res) => {
     res.send('Hello, world!')
