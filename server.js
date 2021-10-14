@@ -4,6 +4,10 @@ const express = require('express')
 const cors = require('cors')
 const rowdy = require('rowdy-logger')
 
+// connect to db
+const db = require('./models')
+db.connect()
+
 // configure express app
 const app = express()
 const rowdyResults = rowdy.begin(app)
