@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 
 const jwtTest = () => {
     try {
-        // USER LOGIN PROCESS
+        // ---- USER LOGIN PROCESS ----
         // create the data payload
         const payload = {
             name: 'Weston',
@@ -11,10 +11,12 @@ const jwtTest = () => {
 
         // signing the jwt
         const token = jwt.sign(payload, 'This is my secret', { expiresIn: 60 * 60 })
-        console.log(token)
+        // console.log(token)
 
-        // REQUEST TO SERVER
+        // ---- REQUEST TO SERVER ----
         // decode the incoming jwt
+        const decoded = jwt.verify(token, 'This is my secret')
+        console.log(decoded)
 
     } catch (error) {
         console.log(error)
