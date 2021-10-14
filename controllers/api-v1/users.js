@@ -20,12 +20,30 @@ router.post('/register', async (req, res) => {
         if(findUser) return res.status(400).json({ msg: 'User already exists' })
 
         // hash password from req.body
+        const password = req.body.password
+        const salt = 12
+        const hashedPassword = await bcrypt.hash(password, salt)
 
         // create our new user
+        const newUser = db.User({
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword
+        })
+
+        await newUser.save()
 
         // create the jwt payload
+        const payload = {
+            id: newUser.id,
+            name: newUser.name,
+            email: newUser.email,
+        }
 
         // sign the jwt and send a response
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 60 * 60 })
+
+        res.json({ token })
         
     } catch (error) {
         console.log(error)
