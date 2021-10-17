@@ -52,6 +52,20 @@ router.post('/register', async (req, res) => {
 })
 
 // POST - /user/login -- validate login credentials
+router.post('/login', async (req, res) => {
+    try {
+        // try to find the user in the database from the req.body.email
+
+        // if the user is not found -- return immediately
+
+        // check the user's password from the db against what is in the req.body
+
+        // if the password doesn't match -- return immediately
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ msg: 'Internal server error' })
+    }
+})
 
 // GET - /auth-locked -- will redirect if a bad jwt is found
 
